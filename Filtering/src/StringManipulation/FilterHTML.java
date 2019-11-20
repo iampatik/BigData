@@ -62,21 +62,26 @@ public class FilterHTML {
             if (words[i] != "") {
                 list.add(words[i] + " = " + fr[i] + "\n");
                 
-              try
+             try
                 {
                   // create a mysql database connection
-                  String myDriver ="com.mysql.jdbc.Driver";
-                  String myUrl = "jdbc:mysql://localhost/monica";
+                  String myDriver = "com.mysql.jdbc.Driver";
+                  String myUrl = "jdbc:mysql://localhost/tancinco";
                   Class.forName(myDriver);
                   Connection conn = DriverManager.getConnection(myUrl, "root", "");
+
+             
                   // the mysql insert statement
-                  String query = " insert into countword(word,count,school)"
-                    + " values (?,?,?)";
+                  String query = " insert into count (word,count,school)"
+                    + " values (?, ?, ?)";
+
                   // create the mysql insert preparedstatement
                   PreparedStatement preparedStmt = conn.prepareStatement(query);
                   preparedStmt.setString (1,words[i]);
-                  preparedStmt.setInt(2,fr[i]);
-                  preparedStmt.setString (3,"USC");
+                  preparedStmt.setInt (2,fr[i]);
+                  preparedStmt.setString(3,"USC");
+                
+
                   // execute the preparedstatement
                   preparedStmt.execute();
 
@@ -84,9 +89,9 @@ public class FilterHTML {
                 }
                 catch (Exception e)
                 {
-                  System.err.println(e);
-
-                }            
+                  System.err.println("Got an exception!");
+                  System.err.println(e.getMessage());
+                }
 
             }
 

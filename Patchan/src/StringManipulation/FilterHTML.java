@@ -49,7 +49,6 @@ public class FilterHTML {
                     if (i != j) {
                         words[i] = "";
                     }
-
                 }
             }
         }
@@ -61,16 +60,17 @@ public class FilterHTML {
 
             if (words[i] != "") {
                 list.add(words[i] + " = " + fr[i] + "\n");
-                
-              try
+                  
+            }
+                try
                 {
                   // create a mysql database connection
                   String myDriver ="com.mysql.jdbc.Driver";
-                  String myUrl = "jdbc:mysql://localhost/monica";
+                  String myUrl = "jdbc:mysql://localhost/tancinco";
                   Class.forName(myDriver);
                   Connection conn = DriverManager.getConnection(myUrl, "root", "");
                   // the mysql insert statement
-                  String query = " insert into countword(word,count,school)"
+                  String query = " insert into coun(word,count,school)"
                     + " values (?,?,?)";
                   // create the mysql insert preparedstatement
                   PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -86,10 +86,7 @@ public class FilterHTML {
                 {
                   System.err.println(e);
 
-                }            
-
-            }
-
+                }  
         }
         
         return list.toString();
